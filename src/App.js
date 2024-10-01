@@ -1,9 +1,10 @@
 import RestaurantCard from './components/RestaurantCard';
+import {Navbar} from './components/Navbar'
 
 function App() {
   return (
     <div className="App">
-      <h1>Navbar will be here</h1>
+      <Navbar />
       <RestaurantCard />
     </div>
   );
