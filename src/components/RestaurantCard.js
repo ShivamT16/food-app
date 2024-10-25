@@ -30,42 +30,45 @@ const RestaurantCard = () => {
     return(
         <div>
 
-        <div>  
-        <div style={{display: "flex", justifyContent: "space-between", alignItems: "center"}}>
-        <h1> {restaurantCard[0]?.card?.card?.header?.title} </h1> 
-        <div style={{display: "flex", gap: "1rem", justifyContent: "space-around" }}>
-          <ArrowBackIcon onClick={handlePrevious} style={{ cursor: "pointer", backgroundColor: "lightgrey", padding: ".2rem", borderRadius: "2rem"}}/>
-          <ArrowForwardIcon onClick={handleNext} style={{ cursor: "pointer", backgroundColor: "lightgrey", padding: ".2rem", borderRadius: "2rem"}}/>
+        <div className="mx-[15%]">  
+        <div className="flex justify-between items-center">
+        <p className="text-[2rem] py-2 font-semibold"> {restaurantCard[0]?.card?.card?.header?.title} </p> 
+        <div className="flex gap-4 justify-around">
+          <ArrowBackIcon fontSize="large" onClick={handlePrevious} className="bg-gray-200 p-1 rounded-3xl cursor-pointer"/>
+          <ArrowForwardIcon fontSize="large" onClick={handleNext} className="bg-gray-200 p-1 rounded-3xl cursor-pointer"/>
         </div>
         </div>
 
-        <div style={{ display: "flex",gap: "1.7rem", overflow: "hidden" }}>
+        <div className="flex gap-4 overflow-hidden">
         {
-         restaurantCard[0]?.card?.card?.imageGridCards?.info?.map((imgIcon, index) => 
-            <div style={{transform: `translateX(-${slide *100}%)`, transitionDuration: "1s" }} key={imgIcon} >
-             <img alt="whats on mind" style={{height: "10.3rem"}} src={ON_MIND_URL + imgIcon.imageId} />
+         restaurantCard[0]?.card?.card?.imageGridCards?.info?.map((imgIcon) => 
+            <div className="shrink-0" style={{transform: `translateX(-${slide *100}%)`, transitionDuration: "1s" }} key={imgIcon} >
+             <img className="w-[9rem] h-[10rem]" alt="whats on mind" src={ON_MIND_URL + imgIcon.imageId} />
             </div>
          )
         }
         </div>
         </div>
 
-        <div>
-        <div style={{display: "flex", justifyContent: "space-between", alignItems: "center"}}>
-         <h1> {restaurantCard[1]?.card?.card?.header?.title} </h1> 
-         <div style={{display: "flex", gap: "1rem", justifyContent: "space-around" }}>
-         <ArrowBackIcon style={{ cursor: "pointer", backgroundColor: "lightgrey", padding: ".2rem", borderRadius: "2rem"}}/>
-         <ArrowForwardIcon style={{ cursor: "pointer", backgroundColor: "lightgrey", padding: ".2rem", borderRadius: "2rem"}}/>
+        <p className="border-b-2 my-10 mx-[15%]" ></p>
+
+        <div className="mx-[15%]">
+        <div className="flex justify-between items-center">
+         <p className="text-[2rem] py-2 font-semibold"> {restaurantCard[1]?.card?.card?.header?.title} </p> 
+         <div className="flex gap-4 justify-around">
+         <ArrowBackIcon fontSize="large" className="bg-[lightgray] p-1 rounded-3xl cursor-pointer"/>
+         <ArrowForwardIcon fontSize="large" className="bg-[lightgray] p-1 rounded-3xl cursor-pointer"/>
          </div>
         </div>
-         <div style={{ display: "flex",gap: "1.5rem", overflow: "hidden", lineHeight: ".8rem"}}>
+
+        <div className="flex gap-6 overflow-hidden leading-[1.5rem]">
         {
          restaurantCard[1]?.card?.card?.gridElements?.infoWithStyle?.restaurants?.map((restaurants) => 
-            <div key={restaurants.info.id} style={{ transform: `translate(-00%)`, transitionDuration: "2s"}} >
-             <img alt="topRestro" style={{height: "10rem", width: "14rem",borderRadius: "1rem"}} src={CLOUDINARY_URL + restaurants.info.cloudinaryImageId } />
-             <h3>{restaurants.info.name} </h3>
-             <h4> {restaurants.info.avgRating} {restaurants.info.sla.slaString} </h4>
-             <p style={{width: "", whiteSpace: "nowrap", textOverflow: "ellipsis", overflow: "hidden" }}> {restaurants.info.cuisines.join(", ")} </p>
+            <div key={restaurants.info.id} className="shrink-0" style={{ transform: `translate(-00%)`, transitionDuration: "2s"}} >
+             <img alt="topRestro" className="h-[10rem] w-[14rem] rounded-xl" src={CLOUDINARY_URL + restaurants.info.cloudinaryImageId } />
+             <p className="text-xl font-medium">{restaurants.info.name} </p>
+             <p className="text-base font-medium"> {restaurants.info.avgRating} {restaurants.info.sla.slaString} </p>
+             <p className="w-[14rem] whitespace-nowrap overflow-hidden text-ellipsis"> {restaurants.info.cuisines.join(", ")} </p>
              <p> {restaurants.info.areaName} </p>
             </div>
          )
@@ -73,18 +76,18 @@ const RestaurantCard = () => {
          </div>
         </div>
 
-        <div>
+        <div className="mx-[15%]">
         {
-         <h1> {restaurantCard[2]?.card?.card?.title} </h1> 
+         <p className="text-[2rem] py-3 font-semibold"> {restaurantCard[2]?.card?.card?.title} </p> 
         }
-         <div style={{ display: "flex", flexWrap: "wrap",margin: "0rem 2rem", gap: "", justifyContent: "space-around" }}>
+         <div className="flex flex-wrap gap-2">
         {
          restaurantCard[4]?.card?.card?.gridElements?.infoWithStyle?.restaurants?.map((restaurants) => 
-            <div key={restaurants.info.id} style={{width: "min-content"}} >
-             <img alt="onlineFood" style={{height: "8rem", width: "11rem",borderRadius: "1rem"}} src={CLOUDINARY_URL + restaurants.info.cloudinaryImageId } />
-             <h3>{restaurants.info.name} </h3>
-             <h4> {restaurants.info.avgRating} {restaurants.info.sla.slaString} </h4>
-             {/* <p> {restaurants.info.cuisines.join(", ")} </p> */}
+            <div key={restaurants.info.id} className="shrink-0 mx-2" >
+             <img alt="onlineFood" className="h-[9rem] w-[13rem] rounded-xl" src={CLOUDINARY_URL + restaurants.info.cloudinaryImageId } />
+             <p className="text-xl font-medium w-[12rem] whitespace-nowrap overflow-hidden text-ellipsis">{restaurants.info.name} </p>
+             <p className="text-base font-medium"> {restaurants.info.avgRating} {restaurants.info.sla.slaString} </p>
+             <p className="w-[12rem] whitespace-nowrap overflow-hidden text-ellipsis"> {restaurants.info.cuisines.join(", ")} </p>
              <p> {restaurants.info.areaName} </p>
             </div>
          )
@@ -92,14 +95,14 @@ const RestaurantCard = () => {
          </div>
         </div>
 
-        <div>
+        <div className="mx-[9%] my-2">
         {
-         <h1> {restaurantCard[6]?.card?.card?.title} </h1> 
+         <p className="text-[2rem] py-2 font-semibold"> {restaurantCard[6]?.card?.card?.title} </p>
         }
-         <div style={{ display: "flex", flexWrap: "wrap", textAlign: "center"}}>
+         <div className="flex flex-wrap gap-3 text-center" >
         {
          restaurantCard[6]?.card?.card?.brands?.map((restro) => 
-            <div style={{border: "1px solid grey", borderRadius: ".5rem", margin: "0.3rem" , padding: "0.4rem", width: "12.5rem", whiteSpace: "nowrap", textOverflow: "ellipsis", overflow: "hidden" }}>
+            <div className="border border-gray-200 font-medium rounded-md m-1 p-2 w-64 overflow-hidden whitespace-nowrap text-ellipsis">
              {restro.text}
             </div>
          )
@@ -107,14 +110,14 @@ const RestaurantCard = () => {
          </div>
         </div>
 
-        <div>
+        <div className="mx-[9%] my-2">
         {
-         <h1> {restaurantCard[7]?.card?.card?.title} </h1> 
+         <p className="text-[2rem] py-2 font-semibold"> {restaurantCard[7]?.card?.card?.title} </p> 
         }
-         <div style={{ display: "inline-flex", flexWrap: "wrap", textAlign: "center"}}>
+         <div className="flex flex-wrap gap-3 text-center">
         {
          restaurantCard[7]?.card?.card?.brands?.map((restro) => 
-            <div style={{border: "1px solid grey", borderRadius: ".5rem", margin: "0.3rem" , padding: "0.4rem", width: "12.5rem", whiteSpace: "nowrap", textOverflow: "ellipsis", overflow: "hidden" }}>
+            <div className="border border-gray-200 font-medium rounded-md m-1 p-2 w-64 overflow-hidden whitespace-nowrap text-ellipsis">
              {restro.text}
             </div>
          )
