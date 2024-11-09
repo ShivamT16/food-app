@@ -1,11 +1,12 @@
-import RestaurantCard from './components/RestaurantCard';
+// import RestaurantCard from './components/RestaurantCard';
 import {Navbar} from './components/Navbar'
+import { Outlet } from 'react-router-dom';
 
 function App() {
   return (
     <div className="App">
-      <Navbar />
-      <RestaurantCard />
+      <Navbar /> 
+      <Outlet />
     </div>
   );
 }

@@ -1,24 +1,13 @@
-import { useEffect, useState } from "react";
+import { useContext, useState } from "react";
 import {ON_MIND_URL, CLOUDINARY_URL} from "../utils/constants"
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import { Link } from "react-router-dom";
+import { CuisineContext } from "../Context/CuisineContext";
 
 const RestaurantCard = () => {
-    const [ restaurantCard, setRestaurantCard ] = useState([]) 
     const [ slide, setSlide] = useState(0)
-
-    useEffect(() => {
-      fetchData()
-    }, [])
-
-    const fetchData = async () => {
-        const response = await fetch("https://www.swiggy.com/dapi/restaurants/list/v5?lat=28.5355161&lng=77.3910265&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING");
-        const json = await response.json();
-        // console.log(json.data.cards)
-        setRestaurantCard(json.data.cards)
-    } 
-
-    // console.log(restaurantCard[0]?.card?.card?.header.title)
+    const { restaurantCard, setCuisineId } = useContext(CuisineContext);
 
     const handleNext = () => {
       setSlide(slide + 3)
@@ -42,9 +31,10 @@ const RestaurantCard = () => {
         <div className="flex gap-4 overflow-hidden">
         {
          restaurantCard[0]?.card?.card?.imageGridCards?.info?.map((imgIcon) => 
-            <div className="shrink-0" style={{transform: `translateX(-${slide *100}%)`, transitionDuration: "1s" }} key={imgIcon} >
+            <Link to={`/cuisine/${imgIcon.action.text}`} onClick={() => setCuisineId(imgIcon.id)} className="shrink-0" style={{transform: `translateX(-${slide *100}%)`, transitionDuration: "1s" }} key={imgIcon} >
              <img className="w-[9rem] h-[10rem]" alt="whats on mind" src={ON_MIND_URL + imgIcon.imageId} />
-            </div>
+             {/* {imgIcon.id} */}
+            </Link>
          )
         }
         </div>
@@ -64,13 +54,13 @@ const RestaurantCard = () => {
         <div className="flex gap-6 overflow-hidden leading-[1.5rem]">
         {
          restaurantCard[1]?.card?.card?.gridElements?.infoWithStyle?.restaurants?.map((restaurants) => 
-            <div key={restaurants.info.id} className="shrink-0" style={{ transform: `translate(-00%)`, transitionDuration: "2s"}} >
+            <Link to={`/restaurant/${restaurants.info.id}`} key={restaurants.info.id} className="shrink-0" style={{ transform: `translate(-00%)`, transitionDuration: "2s"}} >
              <img alt="topRestro" className="h-[10rem] w-[14rem] rounded-xl" src={CLOUDINARY_URL + restaurants.info.cloudinaryImageId } />
              <p className="text-xl font-medium">{restaurants.info.name} </p>
              <p className="text-base font-medium"> {restaurants.info.avgRating} {restaurants.info.sla.slaString} </p>
              <p className="w-[14rem] whitespace-nowrap overflow-hidden text-ellipsis"> {restaurants.info.cuisines.join(", ")} </p>
              <p> {restaurants.info.areaName} </p>
-            </div>
+            </Link>
          )
         }
          </div>
@@ -83,13 +73,13 @@ const RestaurantCard = () => {
          <div className="flex flex-wrap gap-2">
         {
          restaurantCard[4]?.card?.card?.gridElements?.infoWithStyle?.restaurants?.map((restaurants) => 
-            <div key={restaurants.info.id} className="shrink-0 mx-2" >
+            <Link to={`/restaurant/${restaurants.info.id}`} key={restaurants.info.id} className="shrink-0 mx-2" >
              <img alt="onlineFood" className="h-[9rem] w-[13rem] rounded-xl" src={CLOUDINARY_URL + restaurants.info.cloudinaryImageId } />
              <p className="text-xl font-medium w-[12rem] whitespace-nowrap overflow-hidden text-ellipsis">{restaurants.info.name} </p>
              <p className="text-base font-medium"> {restaurants.info.avgRating} {restaurants.info.sla.slaString} </p>
              <p className="w-[12rem] whitespace-nowrap overflow-hidden text-ellipsis"> {restaurants.info.cuisines.join(", ")} </p>
              <p> {restaurants.info.areaName} </p>
-            </div>
+            </Link>
          )
         }
          </div>
