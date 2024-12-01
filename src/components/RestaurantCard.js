@@ -55,7 +55,9 @@ const RestaurantCard = () => {
         {
          restaurantCard[1]?.card?.card?.gridElements?.infoWithStyle?.restaurants?.map((restaurants) => 
             <Link to={`/restaurant/${restaurants.info.id}`} key={restaurants.info.id} className="shrink-0" style={{ transform: `translate(-00%)`, transitionDuration: "2s"}} >
-             <img alt="topRestro" className="h-[10rem] w-[14rem] rounded-xl" src={CLOUDINARY_URL + restaurants.info.cloudinaryImageId } />
+             <div className='w-[15rem] h-[10rem] rounded-xl overflow-hidden relative'>
+              <img alt="topRestro" className="object-cover w-full h-full" src={CLOUDINARY_URL + restaurants.info.cloudinaryImageId } />
+             </div>
              <p className="text-xl font-medium">{restaurants.info.name} </p>
              <p className="text-base font-medium"> {restaurants.info.avgRating} {restaurants.info.sla.slaString} </p>
              <p className="w-[14rem] whitespace-nowrap overflow-hidden text-ellipsis"> {restaurants.info.cuisines.join(", ")} </p>
@@ -74,7 +76,9 @@ const RestaurantCard = () => {
         {
          restaurantCard[4]?.card?.card?.gridElements?.infoWithStyle?.restaurants?.map((restaurants) => 
             <Link to={`/restaurant/${restaurants.info.id}`} key={restaurants.info.id} className="shrink-0 mx-2" >
-             <img alt="onlineFood" className="h-[9rem] w-[13rem] rounded-xl" src={CLOUDINARY_URL + restaurants.info.cloudinaryImageId } />
+             <div className='w-[13rem] h-[9rem] rounded-xl overflow-hidden relative' >
+              <img alt="onlineFood" className="object-cover w-full h-full" src={CLOUDINARY_URL + restaurants.info.cloudinaryImageId } />
+             </div>
              <p className="text-xl font-medium w-[12rem] whitespace-nowrap overflow-hidden text-ellipsis">{restaurants.info.name} </p>
              <p className="text-base font-medium"> {restaurants.info.avgRating} {restaurants.info.sla.slaString} </p>
              <p className="w-[12rem] whitespace-nowrap overflow-hidden text-ellipsis"> {restaurants.info.cuisines.join(", ")} </p>
