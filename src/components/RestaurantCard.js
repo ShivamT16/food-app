@@ -4,6 +4,7 @@ import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { Link } from "react-router-dom";
 import { CuisineContext } from "../Context/CuisineContext";
+import { Shimmer } from "../utils/Shimmer";
 
 const RestaurantCard = () => {
     const [ slide, setSlide] = useState(0)
@@ -16,7 +17,7 @@ const RestaurantCard = () => {
       setSlide(slide - 3)
     }
 
-    return(
+    return( restaurantCard.length <= 0 ? <Shimmer /> :
         <div>
 
         <div className="mx-[15%]">  
