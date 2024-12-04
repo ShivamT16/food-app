@@ -30,3 +30,18 @@ export const Shimmer = () => {
         </div>
     )
 }
+
+export const ShimmerMenu = () => {
+    return(
+        <div className='mx-[14%] my-4'>
+
+            <div className="h-[15rem] my-4 w-full rounded-xl bg-neutral-200" ></div>
+            <div className="h-[15rem] my-4 w-full rounded-xl bg-neutral-300" ></div>
+            <div className="h-[15rem] my-4 w-full rounded-xl bg-neutral-200" ></div>
+            <div className="h-[15rem] my-4 w-full rounded-xl bg-neutral-300" ></div>
+            <div className="h-[15rem] my-4 w-full rounded-xl bg-neutral-200" ></div>
+            <div className="h-[15rem] my-4 w-full rounded-xl bg-neutral-300" ></div>
+
+        </div>
+    )
+}

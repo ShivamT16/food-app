@@ -1,15 +1,20 @@
 import { useParams } from 'react-router-dom'
 import { useRestaurantMenu } from '../utils/useRestaurantMenu'
 import { CLOUDINARY_URL } from '../utils/constants'
+import { ShimmerMenu } from '../utils/Shimmer'
 
 export const RestaurantMenu = () => {
     const {restroId} = useParams()
     const restaurantMenu = useRestaurantMenu(restroId)
 
-    console.log(restaurantMenu?.cards[4]?.groupedCard?.cardGroupMap?.REGULAR?.cards[2]?.card?.card?.itemCards)
+    // console.log(restaurantMenu?.cards[4]?.groupedCard?.cardGroupMap?.REGULAR?.cards[2]?.card?.card?.itemCards.length)
+    // console.log(restaurantMenu.cards)
 
-  return (
+  return ( 
+    restaurantMenu?.cards[4]?.groupedCard?.cardGroupMap?.REGULAR?.cards[2]?.card?.card?.itemCards === undefined ? <ShimmerMenu /> :
+
     <div className='mx-[14rem]'>
+  
         <p className='text-2xl font-bold'> { restaurantMenu?.cards[0]?.card?.card?.text } </p>
 
         { restaurantMenu?.cards[4]?.groupedCard?.cardGroupMap?.REGULAR?.cards[2]?.card?.card?.itemCards?.map((item) => 
