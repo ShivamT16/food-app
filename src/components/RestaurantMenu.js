@@ -7,8 +7,7 @@ export const RestaurantMenu = () => {
     const {restroId} = useParams()
     const restaurantMenu = useRestaurantMenu(restroId)
 
-    // console.log(restaurantMenu?.cards[4]?.groupedCard?.cardGroupMap?.REGULAR?.cards[2]?.card?.card?.itemCards.length)
-    // console.log(restaurantMenu.cards)
+    const menuCategory = restaurantMenu?.cards[4]?.groupedCard?.cardGroupMap?.REGULAR?.cards?.filter((category) => category?.card?.card?.['@type'] === 'type.googleapis.com/swiggy.presentation.food.v2.ItemCategory')
 
   return ( 
     restaurantMenu?.cards[4]?.groupedCard?.cardGroupMap?.REGULAR?.cards[2]?.card?.card?.itemCards === undefined ? <ShimmerMenu /> :
@@ -17,8 +16,24 @@ export const RestaurantMenu = () => {
   
         <p className='text-2xl font-bold'> { restaurantMenu?.cards[0]?.card?.card?.text } </p>
 
-        { restaurantMenu?.cards[4]?.groupedCard?.cardGroupMap?.REGULAR?.cards[2]?.card?.card?.itemCards?.map((item) => 
-            <div className='mx-4 my-0 py-8 flex justify-between border-b border-gray-400'>
+        <div className='border-2 p-4 my-4 rounded-xl shadow-2xl font-medium leading-8' >
+          <p className='text-lg'> {restaurantMenu?.cards[2]?.card?.card?.info?.avgRating} ({restaurantMenu?.cards[2]?.card?.card?.info?.totalRatingsString}) : {restaurantMenu?.cards[2]?.card?.card?.info?.costForTwoMessage} </p>
+          <p className='text-orange-600 underline'> {restaurantMenu?.cards[2]?.card?.card?.info?.cuisines.join(", ")} </p>
+          <p> {restaurantMenu?.cards[2]?.card?.card?.info?.sla?.slaString} </p>
+        </div>
+
+        { menuCategory.map((item) => 
+          <div className='bg-gray-50 shadow-2xl'>
+
+           <div className='flex justify-between py-2 px-4 my-4'>
+             <p className='text-lg font-bold'> 
+              {item?.card?.card?.title} ({item?.card?.card?.title.length}) </p>
+             <p> 🔽 </p>
+           </div>
+
+           <div>
+           { item?.card?.card?.itemCards?.map((item) => 
+            <div className='mx-4 py-6 flex justify-between border-b border-gray-200'>
               
               <div className='w-2/3'>
                 <p> {item?.card?.info?.itemAttribute?.vegClassifier ==="VEG" ? "🟩" : "🟥"} </p>
@@ -35,6 +50,9 @@ export const RestaurantMenu = () => {
               </div>
 
             </div> ) 
+           }
+           </div> 
+          </div> )
         }
 
     </div>
