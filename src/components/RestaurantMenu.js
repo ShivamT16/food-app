@@ -2,10 +2,21 @@ import { useParams } from 'react-router-dom'
 import { useRestaurantMenu } from '../utils/useRestaurantMenu'
 import { CLOUDINARY_URL } from '../utils/constants'
 import { ShimmerMenu } from '../utils/Shimmer'
+import { useState } from 'react'
 
 export const RestaurantMenu = () => {
     const {restroId} = useParams()
     const restaurantMenu = useRestaurantMenu(restroId)
+    const [accordian, setAccordian] = useState({
+      title: 'Recommended',
+      state: true
+    })
+
+    const handleAccordian = (menuTitle) => {
+      setAccordian({
+        title: menuTitle === accordian.title ? '' : menuTitle,
+        state: menuTitle === accordian.title ? !accordian.state : true
+      }) }
 
     const menuCategory = restaurantMenu?.cards[4]?.groupedCard?.cardGroupMap?.REGULAR?.cards?.filter((category) => category?.card?.card?.['@type'] === 'type.googleapis.com/swiggy.presentation.food.v2.ItemCategory')
 
@@ -18,21 +29,22 @@ export const RestaurantMenu = () => {
 
         <div className='border-2 p-4 my-4 rounded-xl shadow-2xl font-medium leading-8' >
           <p className='text-lg'> {restaurantMenu?.cards[2]?.card?.card?.info?.avgRating} ({restaurantMenu?.cards[2]?.card?.card?.info?.totalRatingsString}) : {restaurantMenu?.cards[2]?.card?.card?.info?.costForTwoMessage} </p>
-          <p className='text-orange-600 underline'> {restaurantMenu?.cards[2]?.card?.card?.info?.cuisines.join(", ")} </p>
+          <p className='text-orange-600 underline cursor-pointer'> {restaurantMenu?.cards[2]?.card?.card?.info?.cuisines.join(", ")} </p>
           <p> {restaurantMenu?.cards[2]?.card?.card?.info?.sla?.slaString} </p>
         </div>
 
         { menuCategory.map((item) => 
           <div className='bg-gray-50 shadow-2xl'>
 
-           <div className='flex justify-between py-2 px-4 my-4'>
+           <div className='flex justify-between py-2 px-4 my-4 cursor-pointer' onClick={() => handleAccordian(item.card.card.title)}>
              <p className='text-lg font-bold'> 
               {item?.card?.card?.title} ({item?.card?.card?.title.length}) </p>
-             <p> 🔽 </p>
+             <p> {accordian.title === item.card.card.title ? '🔼' : '🔽' } </p>
            </div>
 
            <div>
-           { item?.card?.card?.itemCards?.map((item) => 
+           { (accordian.title === item.card.card.title && accordian.state)  && 
+           item?.card?.card?.itemCards?.map((item) => 
             <div className='mx-4 py-6 flex justify-between border-b border-gray-200'>
               
               <div className='w-2/3'>
@@ -47,6 +59,7 @@ export const RestaurantMenu = () => {
 
               <div className='w-36 h-32 rounded overflow-hidden relative'>
                 <img className='object-cover w-full h-full' src={CLOUDINARY_URL + item?.card?.info?.imageId } alt="menuImg" />
+                <button className='absolute bottom-1 left-8 bg-white border border-gray-400 text-green-600 px-6 font-bold py-0.5 rounded'> ADD </button>
               </div>
 
             </div> ) 
