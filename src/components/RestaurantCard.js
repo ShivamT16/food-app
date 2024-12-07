@@ -32,7 +32,7 @@ const RestaurantCard = () => {
         <div className="flex gap-4 overflow-hidden">
         {
          restaurantCard[0]?.card?.card?.imageGridCards?.info?.map((imgIcon) => 
-            <Link to={`/cuisine/${imgIcon.action.text}`} onClick={() => setCuisineId(imgIcon.id)} className="shrink-0" style={{transform: `translateX(-${slide *100}%)`, transitionDuration: "1s" }} key={imgIcon} >
+            <Link key={imgIcon.id} to={`/cuisine/${imgIcon.action.text}`} onClick={() => setCuisineId(imgIcon.id)} className="shrink-0" style={{transform: `translateX(-${slide *100}%)`, transitionDuration: "1s" }} >
              <img className="w-[9rem] h-[10rem]" alt="whats on mind" src={ON_MIND_URL + imgIcon.imageId} />
              {/* {imgIcon.id} */}
             </Link>
@@ -47,15 +47,15 @@ const RestaurantCard = () => {
         <div className="flex justify-between items-center">
          <p className="text-[2rem] py-2 font-semibold"> {restaurantCard[1]?.card?.card?.header?.title} </p> 
          <div className="flex gap-4 justify-around">
-         <ArrowBackIcon fontSize="large" className="bg-[lightgray] p-1 rounded-3xl cursor-pointer"/>
-         <ArrowForwardIcon fontSize="large" className="bg-[lightgray] p-1 rounded-3xl cursor-pointer"/>
+         <ArrowBackIcon onClick={handlePrevious} fontSize="large" className="bg-[lightgray] p-1 rounded-3xl cursor-pointer"/>
+         <ArrowForwardIcon onClick={handleNext} fontSize="large" className="bg-[lightgray] p-1 rounded-3xl cursor-pointer"/>
          </div>
         </div>
 
         <div className="flex gap-6 overflow-hidden leading-[1.5rem]">
         {
          restaurantCard[1]?.card?.card?.gridElements?.infoWithStyle?.restaurants?.map((restaurants) => 
-            <Link to={`/restaurant/${restaurants.info.id}`} key={restaurants.info.id} className="shrink-0" style={{ transform: `translate(-00%)`, transitionDuration: "2s"}} >
+            <Link to={`/restaurant/${restaurants.info.id}`} key={restaurants.info.id} className="shrink-0"  style={{transform: `translateX(-${slide *100}%)`, transitionDuration: "1s" }} >
              <div className='w-[15rem] h-[10rem] rounded-xl overflow-hidden relative'>
               <img alt="topRestro" className="object-cover w-full h-full" src={CLOUDINARY_URL + restaurants.info.cloudinaryImageId } />
              </div>
@@ -97,7 +97,7 @@ const RestaurantCard = () => {
          <div className="flex flex-wrap gap-3 text-center" >
         {
          restaurantCard[6]?.card?.card?.brands?.map((restro) => 
-            <div className="border border-gray-200 font-medium rounded-md m-1 p-2 w-64 overflow-hidden whitespace-nowrap text-ellipsis">
+            <div key={restro.text} className="border border-gray-200 font-medium rounded-md m-1 p-2 w-64 overflow-hidden whitespace-nowrap text-ellipsis">
              {restro.text}
             </div>
          )
@@ -112,7 +112,7 @@ const RestaurantCard = () => {
          <div className="flex flex-wrap gap-3 text-center">
         {
          restaurantCard[7]?.card?.card?.brands?.map((restro) => 
-            <div className="border border-gray-200 font-medium rounded-md m-1 p-2 w-64 overflow-hidden whitespace-nowrap text-ellipsis">
+            <div key={restro.text} className="border border-gray-200 font-medium rounded-md m-1 p-2 w-64 overflow-hidden whitespace-nowrap text-ellipsis">
              {restro.text}
             </div>
          )

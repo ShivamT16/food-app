@@ -9,9 +9,14 @@ export const useRestaurantMenu = (restroId) => {
     }, [])
 
     const fetchData = async () => {
+      try {
         const response = await fetch(MENU_URL + restroId)
         const json = await response.json();
         setRestaurantMenu(json.data)
+      } catch (error) {
+        console.error(error);
+        
+      }
     }
 
   return restaurantMenu;
