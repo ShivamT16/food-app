@@ -24,8 +24,8 @@ const RestaurantCard = () => {
         <div className="flex justify-between items-center">
         <p className="text-[2rem] py-2 font-semibold"> {restaurantCard[0]?.card?.card?.header?.title} </p> 
         <div className="flex gap-4 justify-around">
-          <ArrowBackIcon fontSize="large" onClick={handlePrevious} className="bg-gray-200 p-1 rounded-3xl cursor-pointer"/>
-          <ArrowForwardIcon fontSize="large" onClick={handleNext} className="bg-gray-200 p-1 rounded-3xl cursor-pointer"/>
+          <ArrowBackIcon fontSize="large" onClick={handlePrevious} className="bg-gray-200 p-1 rounded-3xl cursor-pointer hover:bg-gray-300"/>
+          <ArrowForwardIcon fontSize="large" onClick={handleNext} className="bg-gray-200 p-1 rounded-3xl cursor-pointer hover:bg-gray-300"/>
         </div>
         </div>
 
@@ -47,8 +47,8 @@ const RestaurantCard = () => {
         <div className="flex justify-between items-center">
          <p className="text-[2rem] py-2 font-semibold"> {restaurantCard[1]?.card?.card?.header?.title} </p> 
          <div className="flex gap-4 justify-around">
-         <ArrowBackIcon onClick={handlePrevious} fontSize="large" className="bg-[lightgray] p-1 rounded-3xl cursor-pointer"/>
-         <ArrowForwardIcon onClick={handleNext} fontSize="large" className="bg-[lightgray] p-1 rounded-3xl cursor-pointer"/>
+         <ArrowBackIcon onClick={handlePrevious} fontSize="large" className="bg-gray-200 p-1 rounded-3xl cursor-pointer hover:bg-gray-300"/>
+         <ArrowForwardIcon onClick={handleNext} fontSize="large" className="bg-gray-200 p-1 rounded-3xl cursor-pointer hover:bg-gray-300"/>
          </div>
         </div>
 

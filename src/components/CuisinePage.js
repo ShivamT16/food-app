@@ -7,13 +7,13 @@ export const CuisinePage = () => {
     const { restaurantCard, cuisineId } = useContext(CuisineContext);
 
     const selectedCuisine = restaurantCard[0]?.card?.card?.imageGridCards?.info?.find(({id}) => id === cuisineId);
-    console.log(selectedCuisine.action.link)
+    // console.log(selectedCuisine.action.link)
 
     useEffect(() => {
         const fetchCuisineData = async () => {
             const response = await fetch(selectedCuisine.action.link);
             const data = await response.json()
-            console.log(data)
+            // console.log(data)
         }
        }, [selectedCuisine.action.link])
 

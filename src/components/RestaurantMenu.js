@@ -20,8 +20,6 @@ export const RestaurantMenu = () => {
 
     const menuCategory = restaurantMenu?.cards[4]?.groupedCard?.cardGroupMap?.REGULAR?.cards?.filter((category) => category?.card?.card?.['@type'] === 'type.googleapis.com/swiggy.presentation.food.v2.ItemCategory')
 
-    // console.log(menuCategory[0]?.card?.card?.itemCards.length)
-
   return ( 
     restaurantMenu?.cards[4]?.groupedCard?.cardGroupMap?.REGULAR?.cards[2]?.card?.card?.itemCards === undefined ? <ShimmerMenu /> :
 
@@ -69,6 +67,25 @@ export const RestaurantMenu = () => {
            </div> 
           </div> )
         }
+
+        <div className='p-4 py-10 mt-10 bg-gray-200'>
+          {
+            restaurantMenu?.cards[4]?.groupedCard?.cardGroupMap?.REGULAR?.cards?.filter((category) => category?.card?.card?.['@type'] === 'type.googleapis.com/swiggy.presentation.food.v2.RestaurantLicenseInfo').map((item)=>
+            <div key={item?.card?.card?.imageId} className='flex gap-4 items-center mb-4' >
+              <img className='w-16' src={CLOUDINARY_URL + item?.card?.card?.imageId } alt="menuImg" />
+              <p className='text-sm text-gray-400'> {item?.card?.card?.text} </p>
+            </div>)
+          }
+
+          {
+            restaurantMenu?.cards[4]?.groupedCard?.cardGroupMap?.REGULAR?.cards?.filter((category) => category?.card?.card?.['@type'] === 'type.googleapis.com/swiggy.presentation.food.v2.RestaurantAddress').map((item) => 
+            <div key={item?.card?.card?.name} className='border-gray-400 border-b border-t py-6'>
+              <p className='font-bold text-gray-400'> {item?.card?.card?.name} </p>
+              <p className='text-sm text-gray-400'> (Outlet:{item?.card?.card?.area}) </p>
+              <p className='mt-2 text-sm text-gray-400'>📌{item?.card?.card?.completeAddress} </p>
+            </div>)
+          }
+        </div>
 
     </div>
   ) }
