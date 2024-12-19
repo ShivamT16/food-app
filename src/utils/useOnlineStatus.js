@@ -11,9 +11,8 @@ export const useOnlineStatus = () => {
 
         window.addEventListener('offline', () => {
             setOnlineStatus(false)
-            alert('Looks like you are Offline')
         })
-    })
+    }, [])
 
     return onlineStatus
 }

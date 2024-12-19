@@ -2,7 +2,8 @@ import { useParams } from 'react-router-dom'
 import { useRestaurantMenu } from '../utils/useRestaurantMenu'
 import { CLOUDINARY_URL } from '../utils/constants'
 import { ShimmerMenu } from '../utils/Shimmer'
-import { useState } from 'react'
+import { useContext, useState } from 'react'
+import { CartContext } from '../Context/CartContext'
 
 export const RestaurantMenu = () => {
     const {restroId} = useParams()
@@ -11,6 +12,8 @@ export const RestaurantMenu = () => {
       title: 'Recommended',
       state: true
     })
+    const { state, dispatch } = useContext(CartContext)
+    // console.log(state.cart.find((cuisine) => cuisine?.card?.info?.id=== "118214162").quantity)
 
     const handleAccordian = (menuTitle) => {
       setAccordian({
@@ -59,7 +62,18 @@ export const RestaurantMenu = () => {
 
               <div className='w-36 h-32 rounded overflow-hidden relative'>
                 <img className='object-cover w-full h-full' src={CLOUDINARY_URL + item?.card?.info?.imageId } alt="menuImg" />
-                <button className='absolute bottom-1 left-8 bg-white border border-gray-400 text-green-600 px-6 font-bold py-0.5 rounded'> ADD </button>
+
+                {state.cart.find((cuisine) => cuisine?.card?.info?.id === item?.card?.info?.id) ?
+
+                 <div className='flex gap-0.5 absolute bottom-1 left-7'>
+                 <button className='bg-white border border-gray-400 text-green-600 px-2 font-bold rounded'> - </button>
+                 <p className='bg-white border border-gray-400 text-green-600 px-2 font-bold rounded'> 
+                 {state.cart.find((cuisine) => cuisine?.card?.info?.id === item?.card?.info?.id).quantity} </p>
+                 <button className='bg-white border border-gray-400 text-green-600 px-2 font-bold rounded'> + </button>
+                 </div> :
+                
+                <button className='absolute bottom-1 left-8 bg-white border border-gray-400 text-green-600 px-6 font-bold py-0.5 rounded' onClick={() => dispatch({type:"ADD_TO_CART", payload: item})}> ADD </button>   }
+                
               </div>
 
             </div> ) 

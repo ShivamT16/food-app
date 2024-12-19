@@ -10,7 +10,7 @@ export const Navbar = () => {
         <img src={restroLogo} alt="logo" className="h-[4rem] rounded-xl" />
         <div className='flex gap-4 mx-4'>
             {onlineStatus ? <p className='text-2xl font-semibold text-green-600'>Online</p> :
-             <p className='text-2xl font-semibold text-red-600'>You are Offline</p>}
+             <p className='text-2xl font-semibold text-red-600'>Offline</p>}
 
             <p className='text-2xl font-semibold' >Search</p>
             <p className='text-2xl font-semibold' >SignIn</p>
