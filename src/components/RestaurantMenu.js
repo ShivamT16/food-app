@@ -2,8 +2,8 @@ import { useParams } from 'react-router-dom'
 import { useRestaurantMenu } from '../utils/useRestaurantMenu'
 import { CLOUDINARY_URL } from '../utils/constants'
 import { ShimmerMenu } from '../utils/Shimmer'
-import { useContext, useState } from 'react'
-import { CartContext } from '../Context/CartContext'
+import { useState } from 'react'
+import { MenuItems } from './MenuItems'
 
 export const RestaurantMenu = () => {
     const {restroId} = useParams()
@@ -12,8 +12,6 @@ export const RestaurantMenu = () => {
       title: 'Recommended',
       state: true
     })
-    const { state, dispatch } = useContext(CartContext)
-    // console.log(state.cart.find((cuisine) => cuisine?.card?.info?.id=== "118214162").quantity)
 
     const handleAccordian = (menuTitle) => {
       setAccordian({
@@ -37,6 +35,7 @@ export const RestaurantMenu = () => {
         </div>
 
         { menuCategory.map((item) => 
+        
           <div key={item?.card?.card?.title} className='bg-gray-50 shadow-2xl'>
 
            <div className='flex justify-between py-2 px-4 my-4 cursor-pointer' onClick={() => handleAccordian(item.card.card.title)}>
@@ -48,38 +47,12 @@ export const RestaurantMenu = () => {
            <div>
            { (accordian.title === item.card.card.title && accordian.state)  && 
            item?.card?.card?.itemCards?.map((item) => 
-            <div key={item?.card?.info?.id} className='mx-4 py-6 flex justify-between border-b border-gray-200'>
-              
-              <div className='w-2/3'>
-                <p> {item?.card?.info?.itemAttribute?.vegClassifier ==="VEG" ? "🟩" : "🟥"} </p>
-                <p className='text-slate-600 font-semibold' > {item?.card?.info?.name} </p>
-                <p className='font-semibold' > ₹{item?.card?.info?.defaultPrice / 100 || item?.card?.info?.finalPrice / 100 || item?.card?.info?.price / 100 } </p>
-                <p className='text-green-800 font-semibold'> {item?.card?.info?.ratings?.aggregatedRating?.rating } 
-                <span className='text-slate-600' > 
-                  {item?.card?.info?.ratings?.aggregatedRating?.ratingCountV2 && (`(${item.card.info.ratings.aggregatedRating.ratingCountV2})`)} </span> </p>
-                <p className='text-slate-600'> {item?.card?.info?.description} </p>
-              </div> 
-
-              <div className='w-36 h-32 rounded overflow-hidden relative'>
-                <img className='object-cover w-full h-full' src={CLOUDINARY_URL + item?.card?.info?.imageId } alt="menuImg" />
-
-                {state.cart.find((cuisine) => cuisine?.card?.info?.id === item?.card?.info?.id) ?
-
-                 <div className='flex gap-0.5 absolute bottom-1 left-7'>
-                 <button className='bg-white border border-gray-400 text-green-600 px-2 font-bold rounded'> - </button>
-                 <p className='bg-white border border-gray-400 text-green-600 px-2 font-bold rounded'> 
-                 {state.cart.find((cuisine) => cuisine?.card?.info?.id === item?.card?.info?.id).quantity} </p>
-                 <button className='bg-white border border-gray-400 text-green-600 px-2 font-bold rounded'> + </button>
-                 </div> :
-                
-                <button className='absolute bottom-1 left-8 bg-white border border-gray-400 text-green-600 px-6 font-bold py-0.5 rounded' onClick={() => dispatch({type:"ADD_TO_CART", payload: item})}> ADD </button>   }
-                
-              </div>
-
-            </div> ) 
+            <MenuItems item={item} key={item?.card?.info?.id} />
+            ) 
            }
            </div> 
-          </div> )
+          </div> 
+          )
         }
 
         <div className='p-4 py-10 mt-10 bg-gray-200'>

@@ -16,17 +16,17 @@ export const cartReducer = (state, action) => {
     };
 
     case "REMOVE_FROM_CART":  
-     return {...state, cart: state.cart.filter(({ id }) => id !== action.payload) }; 
+     return {...state, cart: state.cart.filter((element) => element?.card?.info?.id !== action?.payload?.card?.info?.id) }; 
 
     case "INCREASE_QUANTITY":
      return { ...state, cart: [...state.cart].map((element) =>
-      element.id === action.payload.id
+      element?.card?.info?.id === action?.payload?.card?.info?.id
         ? { ...element, quantity: element.quantity + 1 }
         : element ) };
     
     case "DECREASE_QUANTITY":
-        return { ...state, cart: [...state.cart].map((element) =>
-            element.id === action.payload.id
+      return { ...state, cart: [...state.cart].map((element) =>
+        element?.card?.info?.id === action?.payload?.card?.info?.id
               ? { ...element, quantity: element.quantity - 1 }
               : element ) };
 

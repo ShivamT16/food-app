@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom'
 import restroLogo from '../assests/media/restaurant-icon.jpeg'
 import { useOnlineStatus } from '../utils/useOnlineStatus'
 
@@ -14,7 +15,7 @@ export const Navbar = () => {
 
             <p className='text-2xl font-semibold' >Search</p>
             <p className='text-2xl font-semibold' >SignIn</p>
-            <p className='text-2xl font-semibold' >Cart</p>
+            <Link to="/cart" className='text-2xl font-semibold' >Cart</Link>
         </div>
         </header>
     )
