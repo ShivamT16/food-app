@@ -23,8 +23,8 @@ export const Cart = () => {
 
         {state.cart.length <= 0 ?
         <div className='relative' >
-         <img className='h-1/3' src={cravingImage} alt='cravingImage' />
-         <p className='text-sm md:text-4xl absolute top-14 left-0 p-1 md:top-52 md:left-14 my-10 md:p-2 rounded-2xl shadow-xl text-red-600 bg-yellow-100 font-bold'>
+         <img src={cravingImage} alt='cravingImage' />
+         <p className='text-sm md:text-4xl absolute top-14 left-0 p-1 md:top-52 md:left-14 my-12 md:p-2 rounded-2xl shadow-xl text-red-600 bg-yellow-100 font-bold'>
             Craving something Delicious ?? <Link className='underline text-green-600' to="/">Order Now</Link> </p>
         </div>  :
         
