@@ -6,11 +6,13 @@ import { Link } from "react-router-dom"
 
 export const SearchPage = () => {
     const { restaurantCard, search } = useContext(CuisineContext)
+    const searchedRestaurant = restaurantCard[1]?.card?.card?.gridElements?.infoWithStyle?.restaurants?.filter((restaurant) => restaurant.info.name.toLowerCase().includes(search.toLowerCase()))
+
     return(
         <div className="mx-[22%] flex flex-wrap gap-4 my-4">
         
-        {
-            restaurantCard[1]?.card?.card?.gridElements?.infoWithStyle?.restaurants?.filter((restaurant) => restaurant.info.name.toLowerCase().includes(search.toLowerCase())).map((restaurants) =>
+        { search && searchedRestaurant.length >= 1 ?
+            searchedRestaurant.map((restaurants) =>
             <Link to={`/restaurant/${restaurants.info.id}`} key={restaurants.info.id} className="shrink-0 m-4" >
              <div className='w-[13rem] h-[9rem] rounded-xl overflow-hidden relative' >
                <img alt="onlineFood" className="object-cover w-full h-full" src={CLOUDINARY_URL + restaurants.info.cloudinaryImageId } />
@@ -19,9 +21,10 @@ export const SearchPage = () => {
              <p className="text-base font-medium"> {restaurants.info.avgRating} {restaurants.info.sla.slaString} </p>
              <p className="w-[12rem] whitespace-nowrap overflow-hidden text-ellipsis"> {restaurants.info.cuisines.join(", ")} </p>
              <p> {restaurants.info.areaName} </p>
-            </Link>
-        ) }
+            </Link> ) :
             <img src={searchFood} alt="searchFood" />
+        }
+        
         </div>
     )
 }

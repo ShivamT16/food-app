@@ -26,7 +26,7 @@ export const RestaurantMenu = () => {
 
     <div className='mx-[18%]'>
   
-        <p className='text-2xl font-bold'> { restaurantMenu?.cards[0]?.card?.card?.text } </p>
+        <p className='text-3xl font-bold pt-4'> { restaurantMenu?.cards[0]?.card?.card?.text } </p>
 
         <div className='border-2 p-4 my-4 rounded-xl shadow-2xl font-medium leading-8' >
           <p className='text-lg'> {restaurantMenu?.cards[2]?.card?.card?.info?.avgRating} ({restaurantMenu?.cards[2]?.card?.card?.info?.totalRatingsString}) : {restaurantMenu?.cards[2]?.card?.card?.info?.costForTwoMessage} </p>

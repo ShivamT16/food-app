@@ -8,7 +8,9 @@ import { Shimmer } from "../utils/Shimmer";
 
 const RestaurantCard = () => {
     const [ slide, setSlide] = useState(0)
+    const [slides, setSlides] = useState(0)
     const { restaurantCard, setCuisineId } = useContext(CuisineContext);
+    console.log(restaurantCard)
 
     const handleNext = () => {
       setSlide(slide + 3)
@@ -47,19 +49,19 @@ const RestaurantCard = () => {
         <div className="flex justify-between items-center">
          <p className="text-[2rem] py-2 font-semibold"> {restaurantCard[1]?.card?.card?.header?.title} </p> 
          <div className="flex gap-4 justify-around">
-         <ArrowBackIcon onClick={handlePrevious} fontSize="large" className="bg-gray-200 p-1 rounded-3xl cursor-pointer hover:bg-gray-300"/>
-         <ArrowForwardIcon onClick={handleNext} fontSize="large" className="bg-gray-200 p-1 rounded-3xl cursor-pointer hover:bg-gray-300"/>
+         <ArrowBackIcon onClick={() => setSlides(slides - 3)} fontSize="large" className="bg-gray-200 p-1 rounded-3xl cursor-pointer hover:bg-gray-300"/>
+         <ArrowForwardIcon onClick={() => setSlides(slides + 3)} fontSize="large" className="bg-gray-200 p-1 rounded-3xl cursor-pointer hover:bg-gray-300"/>
          </div>
         </div>
 
         <div className="flex gap-6 overflow-hidden leading-[1.5rem]">
         {
          restaurantCard[1]?.card?.card?.gridElements?.infoWithStyle?.restaurants?.map((restaurants) => 
-            <Link to={`/restaurant/${restaurants.info.id}`} key={restaurants.info.id} className="shrink-0"  style={{transform: `translateX(-${slide *100}%)`, transitionDuration: "1s" }} >
+            <Link to={`/restaurant/${restaurants.info.id}`} key={restaurants.info.id} className="shrink-0"  style={{transform: `translateX(-${slides * 100}%)`, transitionDuration: "1s" }} >
              <div className='w-[15rem] h-[10rem] rounded-xl overflow-hidden relative'>
               <img alt="topRestro" className="object-cover w-full h-full" src={CLOUDINARY_URL + restaurants.info.cloudinaryImageId } />
              </div>
-             <p className="text-xl font-medium">{restaurants.info.name} </p>
+             <p className="text-xl font-medium w-[15rem] whitespace-nowrap overflow-hidden text-ellipsis">{restaurants.info.name} </p>
              <p className="text-base font-medium"> {restaurants.info.avgRating} {restaurants.info.sla.slaString} </p>
              <p className="w-[14rem] whitespace-nowrap overflow-hidden text-ellipsis"> {restaurants.info.cuisines.join(", ")} </p>
              <p> {restaurants.info.areaName} </p>
@@ -97,9 +99,9 @@ const RestaurantCard = () => {
          <div className="flex flex-wrap gap-3 text-center" >
         {
          restaurantCard[6]?.card?.card?.brands?.map((restro) => 
-            <div key={restro.text} className="border border-gray-200 font-medium rounded-md m-1 p-2 w-64 overflow-hidden whitespace-nowrap text-ellipsis">
+            <Link to={restro.link} target="blank" key={restro.text} className="border border-gray-200 font-medium rounded-md m-1 p-2 w-64 overflow-hidden whitespace-nowrap text-ellipsis">
              {restro.text}
-            </div>
+            </Link>
          )
         }
          </div>
@@ -112,9 +114,9 @@ const RestaurantCard = () => {
          <div className="flex flex-wrap gap-3 text-center">
         {
          restaurantCard[7]?.card?.card?.brands?.map((restro) => 
-            <div key={restro.text} className="border border-gray-200 font-medium rounded-md m-1 p-2 w-64 overflow-hidden whitespace-nowrap text-ellipsis">
+            <Link to={restro.link} target="blank" key={restro.text} className="border border-gray-200 font-medium rounded-md m-1 p-2 w-64 overflow-hidden whitespace-nowrap text-ellipsis">
              {restro.text}
-            </div>
+            </Link>
          )
         }
          </div>
