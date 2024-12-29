@@ -10,6 +10,7 @@ import { RestaurantMenu } from './components/RestaurantMenu';
 import { CartProvider } from './Context/CartContext';
 import { Cart } from './components/Cart';
 import { ErrorPage } from './components/Error';
+import { SearchPage } from './components/SearchPage';
 
 const appRouter = createBrowserRouter([
   { path: "/",
@@ -18,6 +19,7 @@ const appRouter = createBrowserRouter([
   { path: "/", element: <RestaurantCard /> },
   { path: "/cuisine/:cuisineLink", element: <CuisinePage /> },
   { path: "/restaurant/:restroId", element: <RestaurantMenu/> },
+  { path: "/search", element: <SearchPage/> },
   { path: "/cart", element: <Cart /> }
   ],
   errorElement: <ErrorPage />

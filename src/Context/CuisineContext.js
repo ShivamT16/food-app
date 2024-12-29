@@ -5,6 +5,7 @@ export const CuisineContext = createContext()
 export const CuisineProvider = ({children}) => {
     const [ restaurantCard, setRestaurantCard ] = useState([]) 
     const [ cuisineId, setCuisineId ] = useState("")
+    const [search, setSearch] = useState('');
 
     useEffect(() => {
       fetchData()
@@ -24,7 +25,7 @@ export const CuisineProvider = ({children}) => {
 
     // const handleCuisineId = (id) => setCuisineId(id) 
     return(
-        <CuisineContext.Provider value={{restaurantCard, setCuisineId, cuisineId}}>
+        <CuisineContext.Provider value={{restaurantCard, setCuisineId, cuisineId, search, setSearch}}>
             {children}
         </CuisineContext.Provider>
     )
