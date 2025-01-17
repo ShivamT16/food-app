@@ -10,7 +10,7 @@ const RestaurantCard = () => {
     const [ slide, setSlide] = useState(0)
     const [slides, setSlides] = useState(0)
     const { restaurantCard, setCuisineId } = useContext(CuisineContext);
-    console.log(restaurantCard)
+   //  console.log(restaurantCard)
 
     const handleNext = () => {
       setSlide(slide + 3)

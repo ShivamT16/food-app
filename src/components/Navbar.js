@@ -24,8 +24,9 @@ export const Navbar = () => {
             {onlineStatus ? <p className='text-2xl font-semibold text-green-600'>Online</p> :
              <p className='text-2xl font-semibold text-red-600'>Offline</p>}
             
-            <p className='text-2xl font-semibold' >SignIn</p>
             <Link to="/cart" className='text-2xl font-semibold' >Cart</Link>
+            <p className='text-2xl font-semibold' >Login</p>
+
         </div>
         </header>
     )
