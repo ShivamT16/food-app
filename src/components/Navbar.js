@@ -20,12 +20,12 @@ export const Navbar = () => {
         <input className='border-2 rounded-xl w-full p-1 text-slate-600 font-medium' onChange={(e) => setSearch(e.target.value)} placeholder='Search for restaurants and food' />
         </Link>
 
-        <div className='flex gap-4 mx-4'>
-            {onlineStatus ? <p className='text-2xl font-semibold text-green-600'>Online</p> :
-             <p className='text-2xl font-semibold text-red-600'>Offline</p>}
+        <div className='flex gap-4 mx-4 md:text-2xl'>
+            {onlineStatus ? <p className='font-semibold text-green-600'>Online</p> :
+             <p className='font-semibold text-red-600'>Offline</p>}
             
-            <Link to="/cart" className='text-2xl font-semibold' >Cart</Link>
-            <p className='text-2xl font-semibold' >Login</p>
+            <Link to="/cart" className='font-semibold' >Cart</Link>
+            <Link to="/signin" className='font-semibold' >SignIn</Link>
 
         </div>
         </header>

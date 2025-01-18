@@ -11,7 +11,7 @@ export const SearchPage = () => {
     return(
         <div className="mx-[22%] flex flex-wrap gap-4 my-4">
         
-        { search && searchedRestaurant.length >= 1 ?
+        { search && searchedRestaurant?.length >= 1 ?
             searchedRestaurant.map((restaurants) =>
             <Link to={`/restaurant/${restaurants.info.id}`} key={restaurants.info.id} className="shrink-0 m-4" >
              <div className='w-[13rem] h-[9rem] rounded-xl overflow-hidden relative' >

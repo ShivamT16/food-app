@@ -40,7 +40,7 @@ export const RestaurantMenu = () => {
 
            <div className='flex justify-between py-2 px-4 my-4 cursor-pointer' onClick={() => handleAccordian(item.card.card.title)}>
              <p className='text-lg font-bold'> 
-              {item?.card?.card?.title} ({item?.card?.card?.itemCards.length}) </p>
+              {item?.card?.card?.title} ({item?.card?.card?.itemCards?.length}) </p>
              <p> {accordian.title === item.card.card.title ? '🔼' : '🔽' } </p>
            </div>
 
