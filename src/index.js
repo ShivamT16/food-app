@@ -14,6 +14,7 @@ import { SearchPage } from './components/SearchPage';
 import { SignIn } from './components/SignIn';
 import { AuthProvider } from './Context/AuthContext';
 import { Login } from './components/LogIn';
+import { AuthRequires } from './utils/AuthRequires';
 
 const appRouter = createBrowserRouter([
   { path: "/",
@@ -23,7 +24,7 @@ const appRouter = createBrowserRouter([
   { path: "/cuisine/:cuisineLink", element: <CuisinePage /> },
   { path: "/restaurant/:restroId", element: <RestaurantMenu/> },
   { path: "/search", element: <SearchPage/> },
-  { path: "/cart", element: <Cart /> },
+  { path: "/cart", element: <AuthRequires> <Cart /> </AuthRequires> },
   { path: "/signin", element: <SignIn /> },
   { path: "/login", element: <Login />}
   ],
@@ -33,11 +34,11 @@ const appRouter = createBrowserRouter([
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <React.StrictMode>
+  <React.StrictMode>  
    <AuthProvider> 
     <CuisineProvider>
      <CartProvider>
-     <RouterProvider router={appRouter} />
+      <RouterProvider router={appRouter} />
      </CartProvider>
     </CuisineProvider>
    </AuthProvider>

@@ -1,10 +1,37 @@
 import { useContext } from "react"
 import { AuthContext } from "../Context/AuthContext"
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 
 export const SignIn = () => { 
     
-    const { newSignInEntry, handleSignInChange, handleSignInSubmit } = useContext(AuthContext)
+    const { newSignInEntry, handleSignInChange, signInRecord, setSignInRecord,setNewSignInEntry, location } = useContext(AuthContext)
+    const navigate = useNavigate()
+
+    const handleSignInSubmit = (e) => {
+        e.preventDefault()
+   
+        if ( !newSignInEntry.firstName || !newSignInEntry.lastName || !newSignInEntry.email 
+           || !newSignInEntry.password || !newSignInEntry.confirmPassword) 
+         { 
+           console.log("Fill the mandatory details")        
+         } else {
+           if(newSignInEntry.password === newSignInEntry.confirmPassword) {
+               const newUser = { ...newSignInEntry, id: new Date().getTime().toString() }
+               setSignInRecord([...signInRecord, newUser])
+               setNewSignInEntry({
+                  firstName: "",
+                  lastName: "",
+                  email: "",
+                  password: "",
+                  confirmPassword: ""
+                 })
+                 setTimeout(() => { navigate( location?.pathname ? location.pathname : "/" ) }, 1500)
+           console.log(signInRecord);
+             } else {
+               console.log("Passwords does not match !!")
+             }
+         }     
+    }
 
     return(
         <div className="border border-red-300 mx-[15%] lg:mx-[35%] my-[2%]">
